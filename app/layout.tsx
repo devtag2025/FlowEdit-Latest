@@ -4,8 +4,8 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 
-import Navbar from "@/components/shared/Navbar/Navbar";
-import Footer from "@/components/shared/Footer/Footer";
+import Navbar from "../components/shared/navbar/Navbar";
+import Footer from "../components/shared/footer/Footer";
 import ClientWrapper from "@/components/ClientWrapper";
 import StoreProviders from "../redux/StoreProviders";
 import AppInitializer from "@/redux/features/appInitilaze/Appintialize";

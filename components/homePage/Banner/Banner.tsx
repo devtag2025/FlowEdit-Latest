@@ -10,7 +10,7 @@ import { useEffect } from "react";
 import { IoMdStar, IoMdStarHalf } from "react-icons/io";
 import SplitType from "split-type";
 import Image from "next/image";
-
+import Link from "next/link";
 const Banner = () => {
   const pathname = usePathname();
 
@@ -132,9 +132,11 @@ const Banner = () => {
                 </p>
 
                 <div className='w-full sm:w-fit shadow-2xl'>
+                  <Link href='/pricing'>
                   <SiteButton className='bg-[#B6C7F5]/30 w-full hover:bg-[#B6C7F5]/30'>
                     Start for Free
                   </SiteButton>
+                  </Link>
                 </div>
 
                 <p className='hero-bottom-text text-white max-w-60 sm:max-w-sm md:max-w-md text-xs sm:text-sm md:text-base leading-[150%] '>

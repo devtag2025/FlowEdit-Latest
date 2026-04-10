@@ -12,15 +12,6 @@ const PriceBanner = ({
   value: PlanType;
   onToggleChange: (value: PlanType) => void;
 }) => {
-  const getDiscountMultiplier = (plan: PlanType) => {
-    switch (plan) {
-      case "monthly": return 1;
-      case "semiannual": return 0.8;
-      case "annual": return 0.65;
-      default: return 1;
-    }
-  };
-
   return (
     <div className='relative overflow-hidden inset-0 bg-gradient-to-b from-[#6386f1] to-[#feffff] z-0'>
       {/* Mobile BG */}
@@ -33,7 +24,6 @@ const PriceBanner = ({
           backgroundRepeat: "no-repeat",
         }}
       />
-
       {/* Desktop BG */}
       <div
         className='absolute top-0 hidden lg:block left-0 right-0 bottom-0 w-full z-0'
@@ -60,7 +50,6 @@ const PriceBanner = ({
         />
       </div>
 
-      {/* CONTENT */}
       <div className='container mx-auto flex flex-col gap-5 items-center mt-[100px] lg:mt-[185px] relative z-20'>
         <PageHeaderButton text='Pricing' />
 
@@ -69,9 +58,9 @@ const PriceBanner = ({
         </h1>
 
         <p className='text-base lg:text-xl leading-[150%] text-white max-w-2xl text-center'>
-          As we grow our library of UI components, we’re introducing a
-          limited-time pricing that’s not only 50% off but also significantly
-          cheaper than what’s on the market
+          As we grow our library of UI components, we're introducing a
+          limited-time pricing that's not only 50% off but also significantly
+          cheaper than what's on the market
         </p>
 
         <div className='pb-[77px]'>
@@ -79,7 +68,7 @@ const PriceBanner = ({
         </div>
       </div>
 
-      {/* Pass planType to Carosel */}
+      {/* PriceCarosel owns all checkout logic via billing.ts */}
       <PriceCarosel planType={value} />
     </div>
   );

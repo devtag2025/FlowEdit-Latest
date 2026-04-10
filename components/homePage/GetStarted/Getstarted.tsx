@@ -2,7 +2,7 @@
 
 import SiteButton from "@/components/shared/SiteButton";
 import Image from "next/image";
-
+import Link from "next/link";
 const GetStarted = () => {
   return (
     <div className='container'>
@@ -22,9 +22,11 @@ const GetStarted = () => {
           </h1>
 
           <div className='w-fit'>
+            <Link href='/pricing'>
             <SiteButton className='bg-[#B6C7F5]/30 hover:bg-[#B6C7F5]/30'>
               Start for Free
             </SiteButton>
+            </Link>
           </div>
         </div>
       </div>

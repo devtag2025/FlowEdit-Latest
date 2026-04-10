@@ -100,9 +100,12 @@ export default function Navbar() {
               }
             {
                 token ? <button onClick={handleLogout} className="px-4  py-2 rounded-md border bg-white text-black "> Logout</button> : <div className='w-full sm:w-fit shadow-2xl'>
+                 <Link href='/pricing'>
+                  {" "}
                   <SiteButton className='bg-[#B6C7F5]/30 w-full hover:bg-[#B6C7F5]/30'>
                     Start for Free
                   </SiteButton>
+                </Link>
                 </div>
             }
             </div>
