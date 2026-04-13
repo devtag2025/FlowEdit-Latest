@@ -6,8 +6,8 @@ export async function createCheckoutSession(plan: string): Promise<{ url: string
   });
 
   if (!res.ok) {
-    const err = await res.json().catch(() => ({}));
-    throw new Error((err as any).message || "Failed to create checkout session");
+    const err = (await res.json().catch(() => ({}))) as { message?: string };
+    throw new Error(err.message || "Failed to create checkout session");
   }
 
   return res.json();

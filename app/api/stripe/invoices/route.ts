@@ -1,13 +1,15 @@
 import Stripe from "stripe";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
-  apiVersion: process.env.STRIPE_API_VERSION || "2026-03-25.dahlia",
-});
+const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
+if (!stripeSecretKey) {
+  throw new Error("Missing STRIPE_SECRET_KEY environment variable");
+}
 
-export async function GET(request) {
-  const { searchParams } = new URL(request.url);
-  const customerId = searchParams.get("customer_id");
+const stripe = new Stripe(stripeSecretKey);
+
+export async function GET(request: NextRequest) {
+  const customerId = request.nextUrl.searchParams.get("customer_id");
 
   if (!customerId) {
     return NextResponse.json({ message: "customer_id required" }, { status: 400 });
@@ -19,7 +21,8 @@ export async function GET(request) {
       limit: 20,
     });
     return NextResponse.json(invoices.data);
-  } catch (error) {
-    return NextResponse.json({ message: error.message }, { status: 500 });
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : "Failed to fetch invoices";
+    return NextResponse.json({ message }, { status: 500 });
   }
 }
