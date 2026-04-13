@@ -52,9 +52,13 @@ interface UpdateProfileOptions {
 
 // ── Initialization ───────────────────────────────────────────────────────────
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: process.env.STRIPE_API_VERSION || "2026-03-25.dahlia",
-});
+const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
+if (!stripeSecretKey) {
+  throw new Error("Missing STRIPE_SECRET_KEY environment variable");
+}
+
+const stripe = new Stripe(stripeSecretKey);
+
 
 // ⚠️ Must be the JWT service_role key (starts with eyJ...) — NOT the sb_secret_ key.
 const supabase: SupabaseClient = createClient(

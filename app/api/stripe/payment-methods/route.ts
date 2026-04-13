@@ -1,11 +1,15 @@
 import Stripe from "stripe";
 import { NextResponse } from "next/server";
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
-  apiVersion: process.env.STRIPE_API_VERSION || "2026-03-25.dahlia",
-});
+const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
+if (!stripeSecretKey) {
+  throw new Error("Missing STRIPE_SECRET_KEY environment variable");
+}
 
-export async function GET(request) {
+const stripe = new Stripe(stripeSecretKey);
+
+
+export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const customerId = searchParams.get("customer_id");
 
@@ -19,7 +23,8 @@ export async function GET(request) {
       type: "card",
     });
     return NextResponse.json(paymentMethods.data);
-  } catch (error) {
-    return NextResponse.json({ message: error.message }, { status: 500 });
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : "Failed to fetch payment methods";
+    return NextResponse.json({ message }, { status: 500 });
   }
 }
