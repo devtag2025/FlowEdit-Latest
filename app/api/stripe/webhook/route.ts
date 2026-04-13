@@ -79,7 +79,14 @@ const planForPrice = (priceId: string | undefined): PlanType => {
 const getStripeCustomerDetails = async (
   customerId: string | null
 ): Promise<StripeCustomerDetails> => {
-  if (!customerId) return {};
+  if (!customerId) {
+    return {
+      name: null,
+      email: null,
+      address: null,
+      city: null,
+    };
+  }
 
   try {
     const customer = await stripe.customers.retrieve(customerId);
@@ -87,7 +94,12 @@ const getStripeCustomerDetails = async (
     // Type guard for Stripe.Customer vs Stripe.DeletedCustomer
     if (customer.deleted) {
       console.warn("[Webhook] Customer was deleted:", customerId);
-      return {};
+      return {
+        name: null,
+        email: null,
+        address: null,
+        city: null,
+      };
     }
 
     return {
@@ -103,7 +115,12 @@ const getStripeCustomerDetails = async (
   } catch (e: unknown) {
     const error = e as Error;
     console.error("[Webhook] getStripeCustomerDetails error:", error.message);
-    return {};
+    return {
+      name: null,
+      email: null,
+      address: null,
+      city: null,
+    };
   }
 };
 
