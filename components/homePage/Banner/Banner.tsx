@@ -134,7 +134,7 @@ const Banner = () => {
                 <div className='w-full sm:w-fit shadow-2xl'>
                   <Link href='/pricing'>
                   <SiteButton className='bg-[#B6C7F5]/30 w-full hover:bg-[#B6C7F5]/30'>
-                    Start for Free
+                    Get Started
                   </SiteButton>
                   </Link>
                 </div>
