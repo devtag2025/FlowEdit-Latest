@@ -32,7 +32,7 @@ const ToggleSwitch = ({ value = "monthly", onChange }: ToggleSwitchProps) => {
         Monthly
       </button>
 
-      <button
+      {/* <button
         onClick={() => handleChange("semiannual")}
         className={`${baseClass} ${active === "semiannual" ? activeClass : inactiveClass
           }`}
@@ -46,7 +46,7 @@ const ToggleSwitch = ({ value = "monthly", onChange }: ToggleSwitchProps) => {
           }`}
       >
         Annual
-      </button>
+      </button> */}
     </div>
   );
 };
